@@ -19,6 +19,7 @@ ci -u /usr/local/etc/sudoers
 ```
 *Exit*
 }}}
+
 ### Setup auto-backup [ZFS] {{{
 *SU*
 ```
@@ -33,6 +34,7 @@ Insert into **/etc/crontab**
 28       0	1	*	*	root	/usr/local/sbin/zfs-auto-snapshot monthly  12
 ```
 }}}
+
 ### Setup logging mails {{{
 *Add to Crontab*
 ```
@@ -48,6 +50,7 @@ monthly_output="matt"					# user or /file
 monthly_status_security_output="matt"			# user or /file' >> /etc/periodic.conf
 ```
 }}}
+
 ### Specify custom options for ports {{{
 ```
 .if ${.CURDIR:M*/security/sshguard}
@@ -57,6 +60,7 @@ monthly_status_security_output="matt"			# user or /file' >> /etc/periodic.conf
 ### Setting up Denyhosts {{{
 **/etc/rc.conf**
 ```
+
 # $Id$
 
 denyhosts_enable="YES"
@@ -73,6 +77,7 @@ sudo touch /etc/hosts.deniedssh
 ```
 **/etc/syslog.conf**
 ```
+
 # Log denyhosts messages
 local7.info					/var/log/wrapper.log
 ```
@@ -84,6 +89,7 @@ sudo touch /var/log/wrapper.log
 /var/log/denyhosts 			644  7 	   1024 *     J     /var/run/denyhosts.pid
 ```
 }}}
+
 ### Jail notes {{{
 *To get ssl, install:*
 ```

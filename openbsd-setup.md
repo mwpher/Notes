@@ -33,6 +33,7 @@ ci -u /etc/sudoers
 sh /home/matt/dotfiles/OpenBSD/openup.sh
 ```
 }}}
+
 ### Setup SSHguard {{{
 ```
 sudo ci -u /etc/rc.conf.local
@@ -58,13 +59,15 @@ block in all
 pass out all
 
 pass in on $ext_if proto tcp from any to any port ssh'
-
+```
+```bash
 sudo ci -u /etc/pf.conf
 pfctl -vnf /etc/pf.conf
 pfctl -f /etc/pf.conf
 /etc/rc.d/sshguard start
 ```
 }}}
+
 ### Setup logging mails {{{
 
 ```
