@@ -1,7 +1,8 @@
 Setup notes for FreeBSD
 ==========
 
-### Begin/setup sudo {{{
+## Begin/setup sudo {{{
+
 *SU to Root*:
 ```
 pkg install sudo zsh git tmux denyhosts logwatch zfstools bash vim-lite
@@ -20,7 +21,8 @@ ci -u /usr/local/etc/sudoers
 *Exit*
 }}}
 
-### Setup auto-backup [ZFS] {{{
+## Setup auto-backup [ZFS] {{{
+
 *SU*
 ```
 zfs set com.sun:auto-snapshot=true DATASET
@@ -35,7 +37,8 @@ Insert into **/etc/crontab**
 ```
 }}}
 
-### Setup logging mails {{{
+## Setup logging mails {{{
+
 *Add to Crontab*
 ```
 0	8	*	*	*	root	/usr/local/sbin/logwatch.pl
@@ -51,16 +54,19 @@ monthly_status_security_output="matt"			# user or /file' >> /etc/periodic.conf
 ```
 }}}
 
-### Specify custom options for ports {{{
+## Specify custom options for ports {{{
+
 ```
 .if ${.CURDIR:M*/security/sshguard}
   SSHGUARDFW=hosts
 .endif
+```
 }}}
-### Setting up Denyhosts {{{
+
+## Setting up Denyhosts {{{
+
 **/etc/rc.conf**
 ```
-
 # $Id$
 
 denyhosts_enable="YES"
@@ -90,7 +96,7 @@ sudo touch /var/log/wrapper.log
 ```
 }}}
 
-### Jail notes {{{
+## Jail notes {{{
 *To get ssl, install:*
 ```
 ca_root_nss
