@@ -23,8 +23,13 @@ echo 'root: matt' >> /etc/mail/aliases
 newaliases
 ```
 ```
-cp /home/matt/dotfiles/OpenBSD/sudoers /etc/sudoers
+cp /etc/sudoers /etc/sudoers.tmp
+cat /home/matt/dotfiles/OpenBSD/sudoers > /etc/sudoers.tmp
+vi /etc/sudoers.tmp # Customize appropriately
+visudo -csf /etc/sudoers.tmp && mv /etc/sudoers.tmp /usr/local/etc/sudoers
 ci -u /etc/sudoers
+rm /etc/sudoers.tmp
+echo '/var/log/sudo.log 	root:wheel 	600  7	   *	168   Z' \ > /etc/newsyslog.conf
 ```
 **Exit**
 
@@ -38,28 +43,40 @@ sh /home/matt/dotfiles/OpenBSD/openup.sh
 ```
 sudo ci -u /etc/rc.conf.local
 sudo co -l /etc/rc.conf.local
-sudo echo '# $Log$
-sshguard_flags="-l /var/log/authlog -b 50:/etc/sshban"' >> /etc/rc.conf.local
+```
+
+```
+# $Id$
+
+sshguard_flags="-l /var/log/authlog -b 50:/etc/sshban"
+
+# $Log$
+```
+```
 sudo ci -u /etc/rc.conf.local
 
 sudo ci -u /etc/pf.conf
 sudo co -l /etc/pf.conf
-sudo echo \
-'# $Log$
+```
+```
+# $Id$
 
 ext_if = "vio0"
-set optimization normal
 set skip on lo
 table <sshguard> persist
 
 block in quick on $ext_if proto tcp from <sshguard> to any port ssh \
-						label "sshguard block"
+						label "SSHguard block"
 
 block in all
 pass out all
 
-pass in on $ext_if proto tcp from any to any port ssh'
+pass in log on $ext_if proto tcp from any to any port ssh label "SSH"'
+
+# $Log$
 ```
+
+
 ```bash
 sudo ci -u /etc/pf.conf
 pfctl -vnf /etc/pf.conf

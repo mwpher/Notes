@@ -15,8 +15,14 @@ sh dotfiles/gitsetup.sh
 ```
 *SU*
 ```
-cp /home/matt/dotfiles/easy-sudoers /usr/local/etc/sudoers
+cp /usr/local/etc/sudoers /usr/local/etc/sudoers.tmp
+cat /home/matt/dotfiles/sudoers > /usr/local/etc/sudoers.tmp
+vi /usr/local/etc/sudoers.tmp # Customize appropriately
+mkdir /usr/local/etc/sudoers.d
+visudo -csf /usr/local/etc/sudoers.tmp && mv /usr/local/etc/sudoers.tmp /usr/local/etc/sudoers
 ci -u /usr/local/etc/sudoers
+rm /etc/sudoers.tmp
+echo '/var/log/sudo.log 	root:wheel 	600  10	   100	*     JC' > /etc/newsyslog.conf
 ```
 *Exit*
 }}}
@@ -60,39 +66,6 @@ monthly_status_security_output="matt"			# user or /file' >> /etc/periodic.conf
 .if ${.CURDIR:M*/security/sshguard}
   SSHGUARDFW=hosts
 .endif
-```
-}}}
-
-## Setting up Denyhosts {{{
-
-**/etc/rc.conf**
-```
-# $Id$
-
-denyhosts_enable="YES"
-syslogd_flags="-ss -c"
-
-# $Log$
-```
-```
-sudo ci -u /etc/rc.conf
-sudo cp /home/matt/dotfiles/denyhosts/denyhosts.conf \
-			/usr/local/etc/denyhosts.conf
-sudo cp /home/matt/dotfiles/denyhosts/hosts.allow /etc/hosts.allow
-sudo touch /etc/hosts.deniedssh
-```
-**/etc/syslog.conf**
-```
-
-# Log denyhosts messages
-local7.info					/var/log/wrapper.log
-```
-```
-sudo touch /var/log/wrapper.log
-```
-**/etc/newsyslog.conf**
-```
-/var/log/denyhosts 			644  7 	   1024 *     J     /var/run/denyhosts.pid
 ```
 }}}
 
