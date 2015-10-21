@@ -8,6 +8,14 @@ Add the following line to the "default" entry in gettytab(5):
 ```
 :cl=\E[H\E[2J:
 ```
+
+Set variable in /etc/profile: 
+```
+export PKG_PATH=http://mirror.esc7.net/pub/OpenBSD/`uname -r`/packages/`uname -m`/
+```
+
+Then `source /etc/profile`.
+
 ```
 pkg_add zsh git bash vim sshguard
 ```
@@ -25,12 +33,23 @@ newaliases
 ```
 cp /etc/sudoers /etc/sudoers.tmp
 cat /home/matt/dotfiles/OpenBSD/sudoers > /etc/sudoers.tmp
-vi /etc/sudoers.tmp # Customize appropriately
-visudo -csf /etc/sudoers.tmp && mv /etc/sudoers.tmp /usr/local/etc/sudoers
+vi /etc/sudoers.tmp
+``` 
+
+Customize appropriately. To make sure package install through sudo works, add
+this if it isn't there already:
+
+``` 
+Defaults env_keep +="FTPMODE PKG_CACHE PKG_PATH SM_PATH SSH_AUTH_SOCK"
+``` 
+
+``` 
+visudo -csf /etc/sudoers.tmp && mv /etc/sudoers.tmp /etc/sudoers
 ci -u /etc/sudoers
 rm /etc/sudoers.tmp
-echo '/var/log/sudo.log 	root:wheel 	600  7	   *	168   Z' \ > /etc/newsyslog.conf
+echo '/var/log/sudo.log 	root:wheel 600 7	   *	168   Z' > /etc/newsyslog.conf
 ```
+
 **Exit**
 
 **Install system patches**
