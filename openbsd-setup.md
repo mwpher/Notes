@@ -19,6 +19,7 @@ Then `source /etc/profile`.
 ```
 pkg_add zsh git bash vim sshguard
 ```
+
 **Exit**
 
 *Now you run the general.sh script*

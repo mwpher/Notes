@@ -10,3 +10,7 @@ Add to git config:
 
 Then, run **git permission-reset**
 
+Bacula SSH Backup
+-----------------
+
+See: http://wiki.bacula.org/doku.php?id=sshtunnel
