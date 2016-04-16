@@ -14,3 +14,16 @@ Bacula SSH Backup
 -----------------
 
 See: http://wiki.bacula.org/doku.php?id=sshtunnel
+
+Misc
+------
+
+Install **pwgen**.
+
+```sh
+# Generate a secure 16-char password
+pwgen -s -c -n -B -y 16 1
+
+# Generate 10 to choose from
+pwgen -s -c -n -B -y 16 10
+```

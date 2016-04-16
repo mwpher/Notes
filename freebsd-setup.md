@@ -5,7 +5,7 @@ Setup notes for FreeBSD
 
 *SU to Root*:
 ```
-pkg install sudo zsh git tmux denyhosts logwatch zfstools bash vim-lite
+pkg install sudo zsh git tmux denyhosts logwatch zfstools bash vim-lite pwgen
 ```
 *exit*
 ```
