@@ -17,7 +17,7 @@ export PKG_PATH=http://mirror.esc7.net/pub/OpenBSD/`uname -r`/packages/`uname -m
 Then `source /etc/profile`.
 
 ```
-pkg_add zsh git bash vim sshguard
+pkg_add zsh git bash vim sshguard sudo
 ```
 
 **Exit**
