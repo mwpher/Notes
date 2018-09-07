@@ -9,12 +9,13 @@ Add the following line to the "default" entry in gettytab(5):
 :cl=\E[H\E[2J:
 ```
 
-Set variable in /etc/profile: 
+/etc/installurl: 
+
 ```
-export PKG_PATH=http://mirror.esc7.net/pub/OpenBSD/`uname -r`/packages/`uname -m`/
+http://mirror.esc7.net/pub/OpenBSD
 ```
 
-Then `source /etc/profile`.
+Then:
 
 ```
 pkg_add zsh git bash vim sshguard sudo
@@ -27,6 +28,7 @@ pkg_add zsh git bash vim sshguard sudo
 **start tmux and SU to Root**
 
 Then, add a *mail alias* for getting root status mails:
+
 ```
 echo 'root: matt' >> /etc/mail/aliases
 newaliases
@@ -55,7 +57,7 @@ echo '/var/log/sudo.log 	root:wheel 600 7	   *	168   Z' > /etc/newsyslog.conf
 
 **Install system patches**
 ```
-sh /home/matt/dotfiles/OpenBSD/openup.sh
+syspatch
 ```
 }}}
 
@@ -107,10 +109,5 @@ pfctl -f /etc/pf.conf
 
 ### Setup logging mails {{{
 
-```
-sudo crontab -e
-```
-```
-0	8	*	*	*	/usr/sbin/logwatch
-```
+(Logwatch dead, hopefully can find a replacement.)
 }}}
